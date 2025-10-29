@@ -12,6 +12,10 @@ type PropsType = {
   keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
   isRightIcon?: boolean;
   children?: React.ReactNode;
+  value?: string;
+  onChangeText?: (text: string) => void;
+  secureTextEntry?: boolean;
+  autoCapitalize?: "none" | "sentences" | "words" | "characters";
 };
 
 const FormField = ({
@@ -22,6 +26,10 @@ const FormField = ({
   keyboardType = "default",
   isRightIcon,
   children,
+  value,
+  onChangeText,
+  secureTextEntry: secureTextEntryProp,
+  autoCapitalize,
 }: PropsType) => {
   const { colorScheme } = useColorScheme();
   const [showPassword, setShowPassword] = useState(false);
@@ -42,15 +50,20 @@ const FormField = ({
           placeholderTextColor={colorScheme === "dark" ? "#ffff" : "#14141466"}
           className=" flex-1 py-4 "
           secureTextEntry={
-            [
-              "Password",
-              "Old Password",
-              "New password",
-              "Confirm Password",
-            ].includes(title) && !showPassword
+            secureTextEntryProp !== undefined
+              ? (secureTextEntryProp && !showPassword)
+              : ([
+                  "Password",
+                  "Old Password",
+                  "New password",
+                  "Confirm Password",
+                ].includes(title) && !showPassword)
           }
           keyboardType={keyboardType}
           numberOfLines={1}
+          value={value}
+          onChangeText={onChangeText}
+          autoCapitalize={autoCapitalize}
         />
         {["Password", "Confirm Password", "New password"].includes(title) && (
           <Pressable

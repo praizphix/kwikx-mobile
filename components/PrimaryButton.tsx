@@ -6,10 +6,12 @@ const PrimaryButton = ({
   text,
   onPress,
   isSecondary,
+  disabled,
 }: {
   text: string;
   onPress: () => void;
   isSecondary?: boolean;
+  disabled?: boolean;
 }) => {
   return (
     <TouchableOpacity
@@ -17,8 +19,9 @@ const PrimaryButton = ({
         isSecondary
           ? "bg-bgColor  border-bgColor2 dark:bg-darkN20 dark:border-darkN40 "
           : "bg-g300 border-g300"
-      }`}
+      } ${disabled ? "opacity-50" : ""}`}
       onPress={onPress}
+      disabled={disabled}
     >
       <ThemedText
         className={` text-center ${isSecondary ? "text-g300" : "text-white"}`}

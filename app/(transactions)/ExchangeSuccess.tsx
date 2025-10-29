@@ -9,7 +9,7 @@ import { CURRENCY_SYMBOLS } from "@/types/database";
 
 const ExchangeSuccess = () => {
   const params = useLocalSearchParams();
-  const { fromCurrency, toCurrency, fromAmount, toAmount, fee } = params;
+  const { fromCurrency, toCurrency, fromAmount, toAmount, fee, reference } = params;
 
   return (
     <View className="flex-1 bg-white dark:bg-n0">
@@ -32,6 +32,20 @@ const ExchangeSuccess = () => {
         </View>
 
         <View className="w-full bg-n20 dark:bg-darkN20 rounded-2xl p-6 mb-6">
+          {reference && (
+            <View className="flex-row justify-between items-center mb-4 pb-4 border-b border-n40 dark:border-darkN40">
+              <ThemedText
+                className="text-sm text-n500 dark:text-darkN500"
+                text="Reference"
+              />
+              <ThemedText
+                className="text-xs dark:text-white"
+                text={reference as string}
+                weight="medium"
+              />
+            </View>
+          )}
+
           <View className="flex-row justify-between items-center mb-4 pb-4 border-b border-n40 dark:border-darkN40">
             <ThemedText
               className="text-sm text-n500 dark:text-darkN500"

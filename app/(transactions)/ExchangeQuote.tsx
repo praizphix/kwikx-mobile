@@ -1,4 +1,4 @@
-import { View, ScrollView, Pressable, ActivityIndicator } from "react-native";
+import { View, ScrollView, Pressable, ActivityIndicator, Alert } from "react-native";
 import React, { useState, useEffect } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import ThemedText from "@/components/ThemedText";
@@ -8,6 +8,8 @@ import PrimaryButton from "@/components/PrimaryButton";
 import type { Quote } from "@/types/database";
 import { getQuoteTimeRemaining } from "@/services/quotes";
 import { CURRENCY_SYMBOLS } from "@/types/database";
+import { executeExchange } from "@/services/transactions";
+import { getCurrentUser } from "@/services/auth";
 
 const ExchangeQuote = () => {
   const params = useLocalSearchParams();
@@ -20,7 +22,7 @@ const ExchangeQuote = () => {
     if (!quote) return;
 
     const interval = setInterval(() => {
-      const remaining = getQuoteTimeRemaining(quote);
+      const remaining = getQuoteTimeRemaining(quote.expires_at);
       setTimeRemaining(remaining);
 
       if (remaining <= 0) {
@@ -37,8 +39,18 @@ const ExchangeQuote = () => {
 
     setExecuting(true);
     try {
-      // TODO: Execute the exchange via API
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const user = await getCurrentUser();
+      if (!user) {
+        Alert.alert("Error", "You must be logged in to complete this exchange");
+        router.replace("/(authentication)/SignIn");
+        return;
+      }
+
+      const result = await executeExchange({
+        userId: user.id,
+        quoteId: quote.id,
+      });
+
       router.push({
         pathname: "/(transactions)/ExchangeSuccess",
         params: {
@@ -47,10 +59,16 @@ const ExchangeQuote = () => {
           fromAmount: quote.from_amount.toString(),
           toAmount: quote.to_amount.toString(),
           fee: quote.total_fee.toString(),
+          transactionId: result.transaction.id,
+          reference: result.transaction.reference,
         },
       });
     } catch (error) {
       console.error("Exchange failed:", error);
+      Alert.alert(
+        "Exchange Failed",
+        error instanceof Error ? error.message : "An unexpected error occurred. Please try again."
+      );
       setExecuting(false);
     }
   };
@@ -58,7 +76,7 @@ const ExchangeQuote = () => {
   if (!quote) {
     return (
       <View className="flex-1 bg-white dark:bg-n0 items-center justify-center">
-        <ThemedText text="Invalid quote" />
+        <ThemedText className="text-center" text="Invalid quote" />
       </View>
     );
   }

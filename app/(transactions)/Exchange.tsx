@@ -62,12 +62,30 @@ const Exchange = () => {
         return;
       }
 
-      const quote = await createQuote({
-        userId: user.id,
+      if (!rate) {
+        Alert.alert("Error", "Exchange rate not available");
+        return;
+      }
+
+      const fromAmount = parseFloat(amount);
+      const feeFlat = rate.fee_flat;
+      const feePercentage = rate.fee_percentage;
+      const totalFee = feeFlat + (fromAmount * feePercentage);
+      const toAmount = (fromAmount - totalFee) * rate.rate;
+
+      const quote = await createQuote(
+        user.id,
+        rate.id,
         fromCurrency,
         toCurrency,
-        fromAmount: parseFloat(amount),
-      });
+        fromAmount,
+        rate.rate,
+        feeFlat,
+        feePercentage,
+        totalFee,
+        toAmount,
+        rate.quote_ttl_seconds
+      );
 
       router.push({
         pathname: "/(transactions)/ExchangeQuote",

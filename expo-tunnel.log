@@ -1,0 +1,42 @@
+env: load .env
+env: export EXPO_PUBLIC_SUPABASE_URL EXPO_PUBLIC_SUPABASE_ANON_KEY
+Starting project at /tmp/cc-agent/59403339/project
+Starting Metro Bundler
+Tunnel connected.
+Tunnel ready.
+The following packages should be updated for best compatibility with the installed expo version:
+  expo@52.0.25 - expected version: ~52.0.47
+  expo-blur@14.0.2 - expected version: ~14.0.3
+  expo-camera@16.0.14 - expected version: ~16.0.18
+  expo-constants@17.0.4 - expected version: ~17.0.8
+  expo-font@13.0.3 - expected version: ~13.0.4
+  expo-linking@7.0.4 - expected version: ~7.0.5
+  expo-router@4.0.16 - expected version: ~4.0.21
+  expo-splash-screen@0.29.20 - expected version: ~0.29.24
+  expo-symbols@0.2.1 - expected version: ~0.2.2
+  expo-system-ui@4.0.7 - expected version: ~4.0.9
+  react-native@0.76.6 - expected version: 0.76.9
+  react-native-svg@15.11.1 - expected version: 15.8.0
+  jest-expo@52.0.3 - expected version: ~52.0.6
+Your project may not work correctly until you install the expected versions of the packages.
+Waiting on http://localhost:8081
+Logs for your project will appear below.
+| Dynamic import at line 89: require(s). This module may not work as intended when deployed to a runtime.
+| Dynamic import at line 43: require(s). This module may not work as intended when deployed to a runtime.
+| Dynamic import at line 135: require(s). This module may not work as intended when deployed to a runtime.
+| Dynamic import at line 11: require(s). This module may not work as intended when deployed to a runtime.
+| Dynamic import at line 22: require(s). This module may not work as intended when deployed to a runtime.
+| Dynamic import at line 20: require(s). This module may not work as intended when deployed to a runtime.
+| Dynamic import at line 38: require(s). This module may not work as intended when deployed to a runtime.
+Web Bundling failed 28810ms node_modules/expo-router/entry.js (1314 modules)
+
+Metro error: assets/images/google.png: unsupported file type: undefined (file: /tmp/cc-agent/59403339/project/assets/images/google.png)
+
+  TypeError: unsupported file type: undefined (file: /tmp/cc-agent/59403339/project/assets/images/google.png)
+    at lookup (/tmp/cc-agent/59403339/project/node_modules/image-size/dist/index.js:42:11)
+    at imageSize (/tmp/cc-agent/59403339/project/node_modules/image-size/dist/index.js:113:16)
+    at getAssetData (/tmp/cc-agent/59403339/project/node_modules/metro/src/Assets.js:156:32)
+    at async getUniversalAssetData (/tmp/cc-agent/59403339/project/node_modules/@expo/metro-config/build/transform-worker/getAssets.js:23:18)
+    at async Object.transform (/tmp/cc-agent/59403339/project/node_modules/@expo/metro-config/build/transform-worker/asset-transformer.js:83:18)
+    at async transformAsset (/tmp/cc-agent/59403339/project/node_modules/@expo/metro-config/build/transform-worker/metro-transform-worker.js:411:20)
+λ Bundling failed 28891ms node_modules/expo-router/node/render.js (1276 modules)

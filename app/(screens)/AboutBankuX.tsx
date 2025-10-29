@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import React from "react";
 import PageTitle from "@/components/ui/PageTitle";
 import ThemedText from "@/components/ThemedText";

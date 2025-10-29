@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import React from "react";
 import PageTitle from "@/components/ui/PageTitle";
 import FormField from "@/components/formField/FormField";
@@ -28,5 +28,3 @@ const AddNewContact = () => {
 };
 
 export default AddNewContact;
-
-const styles = StyleSheet.create({});

@@ -1,6 +1,5 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
-import { useColorScheme } from "nativewind";
 import { router } from "expo-router";
 import PrimaryButton from "@/components/PrimaryButton";
 import ThemedText from "@/components/ThemedText";
@@ -10,7 +9,6 @@ import CircleBg from "@/components/ui/CircleBg";
 const SIZE = 100;
 
 const PasswordResetSuccessfully = () => {
-  const { colorScheme } = useColorScheme();
   return (
     <View className="bg-white h-full justify-center items-center dark:bg-n0">
       <View className=" justify-center items-center ">

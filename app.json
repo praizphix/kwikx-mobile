@@ -44,7 +44,9 @@
       },
       "eas": {
         "projectId": "f137d7a3-8dcd-420f-b2d7-219dad5b2214"
-      }
+      },
+      "EXPO_PUBLIC_SUPABASE_URL": "https://vdkvbtlazszususoqlwp.supabase.co",
+      "EXPO_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZka3ZidGxhenN6dXN1c29xbHdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE3MzYyNzksImV4cCI6MjA3NzMxMjI3OX0.u6T1cKHvHQ1cfFPG-Haj0hU_qrpxD8KPOVIGWE27QpI"
     }
   }
 }

@@ -38,7 +38,7 @@ const SignUp = () => {
 
     setLoading(true);
     try {
-      await signUp({ email, password });
+      await signUp(email, password);
       Alert.alert(
         "Success",
         "Account created successfully! Please sign in.",

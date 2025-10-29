@@ -10,7 +10,7 @@ export default function ScreenLayout() {
     <View className="h-full">
       <Slot />
       <View className="absolute bottom-0 left-0 right-0 z-50">
-        <View className="p-6 bg-g300 rounded-t-3xl flex-row justify-between items-center">
+        <View className="p-6 bg-primary rounded-t-3xl flex-row justify-between items-center">
           {tabDate.map(({ id, name, icon, link }, idx) => (
             <View key={`${id}`}>
               {name ? (
@@ -22,7 +22,7 @@ export default function ScreenLayout() {
                   className="flex flex-col gap-y-1 justify-center items-center"
                 >
                   {React.createElement(icon, {
-                    color: `${activeTab === idx ? "#FFB323" : "white"}`,
+                    color: `${activeTab === idx ? "#F4B942" : "white"}`,
                     type: `${activeTab === idx ? "fill" : ""}`,
                     size: "30px",
                   })}
@@ -35,7 +35,7 @@ export default function ScreenLayout() {
               ) : (
                 <Pressable
                   onPress={() => router.push("/OpenCamera")}
-                  className="flex justify-center items-center p-3.5 bg-o300 rounded-full"
+                  className="flex justify-center items-center p-3.5 bg-accent rounded-full"
                 >
                   {React.createElement(icon, { color: "", size: "24px" })}
                 </Pressable>

@@ -6,18 +6,25 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bgColor: "#EBF3F0",
-        bgColor2: "#abcfbf",
+        bgColor: "#E8F4F0",
+        bgColor2: "#a3d5c3",
 
-        //green color
-        g300: "#328B64",
+        //KwikX brand colors
+        primary: "#0A5344",
+        primaryDark: "#083D32",
+        primaryLight: "#0D6B55",
+        accent: "#F4B942",
+        accentDark: "#E5A831",
+        accentLight: "#F7C666",
+
+        //legacy green (keep for gradual migration)
+        g300: "#0A5344",
         darkG300: "#353535",
 
-        //orange
-        o50: "#FFF7E9",
-
-        o75: "#FFE0A5",
-        o300: "#FFB323",
+        //legacy orange (mapped to accent)
+        o50: "#FFF9ED",
+        o75: "#F9D796",
+        o300: "#F4B942",
 
         //black color
         n0: "#090909",

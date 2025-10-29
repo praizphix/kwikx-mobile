@@ -35,7 +35,7 @@ const SignIn = () => {
             className="flex-row justify-end pt-2"
           >
             <ThemedText
-              className="text-sm text-g300"
+              className="text-sm text-primary"
               text="Forgot password?"
               weight="semiBold"
             />

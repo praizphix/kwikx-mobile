@@ -21,18 +21,11 @@ const Home = () => {
             <Image source={user} className="w-12 h-12 object-cover" />
           </View>
 
-          <View className="flex-row">
-            <ThemedText
-              className="text-2xl dark:text-white"
-              text="Banku"
-              weight="semiBold"
-            />
-            <ThemedText
-              className="text-2xl text-g300"
-              text="X"
-              weight="semiBold"
-            />
-          </View>
+          <Image
+            source={require('@/assets/images/Untitled design.png')}
+            className="w-12 h-12"
+            resizeMode="contain"
+          />
 
           <Pressable
             onPress={() => router.push("/Notifications")}
@@ -63,28 +56,28 @@ const Home = () => {
         <View className="px-6 relative z-20">
           <View className="flex-row gap-x-3 justify-start items-center">
             <Pressable
-              onPress={() => router.push("/RequestMoney")}
-              className="bg-orange-200 rounded-2xl py-4 flex-1 max-w-[85px] flex flex-col justify-center items-center shrink-0"
+              onPress={() => router.push("/Exchange")}
+              className="bg-accent/20 rounded-2xl py-4 flex-1 max-w-[85px] flex flex-col justify-center items-center shrink-0"
             >
               <View className="h-8 w-8 rounded-full bg-n0 flex justify-center items-center">
                 <Image source={icon1} className="w-4 h-4" />
               </View>
               <ThemedText
                 className="pt-3 text-center dark:text-n0 text-sm"
-                text="Request"
+                text="Exchange"
                 weight="medium"
               />
             </Pressable>
             <Pressable
-              onPress={() => router.push("/SendMoney")}
-              className="bg-red-200 rounded-2xl py-4 flex-1 max-w-[85px] flex flex-col justify-center items-center shrink-0"
+              onPress={() => router.push("/DepositMoney")}
+              className="bg-primary/20 rounded-2xl py-4 flex-1 max-w-[85px] flex flex-col justify-center items-center shrink-0"
             >
               <View className="h-8 w-8 rounded-full bg-n0 flex justify-center items-center">
                 <Image source={icon2} className="w-4 h-4" />
               </View>
               <ThemedText
                 className="pt-3 text-center dark:text-n0 text-sm"
-                text="Send"
+                text="Deposit"
                 weight="medium"
               />
             </Pressable>
@@ -104,11 +97,10 @@ const Home = () => {
             </Pressable>
             <Pressable
               onPress={() => router.push("/TopUpMoney")}
-              className="bg-sky-200 rounded-2xl py-4 flex-1 max-w-[85px] flex flex-col justify-center items-center shrink-0"
+              className="bg-primary/10 rounded-2xl py-4 flex-1 max-w-[85px] flex flex-col justify-center items-center shrink-0"
             >
               <View className="h-8 w-8 rounded-full bg-n0 flex justify-center items-center">
                 <Image source={icon2} className="w-4 h-4" />
-                <Image />
               </View>
 
               <ThemedText
@@ -123,7 +115,7 @@ const Home = () => {
           <View className="px-6 pt-8">
             <Pressable
               onPress={() => router.push("/BillPay")}
-              className="bg-g300 rounded-2xl py-5 px-6 flex-row justify-between items-center"
+              className="bg-primary rounded-2xl py-5 px-6 flex-row justify-between items-center"
             >
               <View className="w-1/2">
                 <ThemedText
@@ -157,7 +149,7 @@ const Home = () => {
                 className=""
               >
                 <ThemedText
-                  className="text-g300  text-sm"
+                  className="text-primary  text-sm"
                   text=" View All"
                   weight="semiBold"
                 />

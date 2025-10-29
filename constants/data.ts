@@ -55,21 +55,21 @@ export const onbordingSliderData = [
   {
     id: 1,
     img: onBoardingSliderImg1,
-    title: "Quiz On the Go",
+    title: "Fast Currency Exchange",
     description:
-      "Answer a quiz for a shot at winning thrilling prizes! Test your knowledge and win big!",
+      "Exchange between CFA, Naira, and USDT instantly with transparent rates and low fees",
   },
   {
     id: 2,
     img: onBoardingSliderImg2,
-    title: "Knowledge Boosting",
-    description: "Find fun and interesting quizzes to boost up your knowledge",
+    title: "Multi-Currency Wallets",
+    description: "Manage your CFA, NGN, and USDT in separate secure wallets",
   },
   {
     id: 3,
     img: onBoardingSliderImg3,
-    title: "Win Rewards Galore",
-    description: "Find fun and interesting quizzes to boost up your knowledge",
+    title: "Secure & Reliable",
+    description: "Bank-grade security with full transaction history and instant transfers",
   },
 ];
 
@@ -233,7 +233,7 @@ export const notifications = [
       {
         id: uuid.v4(),
         title: "New Updates Available!",
-        desc: "Update the BankoX app and enjoy new features",
+        desc: "Update the KwikX app and enjoy new features",
         time: "12.10 pm",
         icon: PhInfo,
       },
@@ -260,14 +260,14 @@ export const notifications = [
       {
         id: uuid.v4(),
         title: "Password Change",
-        desc: "Update the BankoX app and enjoy new features",
+        desc: "Your password has been updated successfully",
         time: "07.30 pm",
         icon: PhKey,
       },
       {
         id: uuid.v4(),
-        title: "Transfer Success",
-        desc: "Update the BankoX app and enjoy new features",
+        title: "Exchange Success",
+        desc: "Your exchange was completed successfully",
         time: "08.30 pm",
         icon: PhSwap,
       },
@@ -300,8 +300,8 @@ export const notifications = [
       },
       {
         id: uuid.v4(),
-        title: "Transfer Success",
-        desc: "Update the BankoX app and enjoy new features",
+        title: "Exchange Success",
+        desc: "Your exchange was completed successfully",
         time: "08.30 pm",
         icon: PhSwap,
       },
@@ -495,7 +495,7 @@ export const settingsLists = [
   {
     id: uuid.v4(),
     icon: PhFile,
-    name: "About BankuX",
+    name: "About KwikX",
     link: "/AboutBankuX",
   },
 ];
@@ -503,33 +503,33 @@ export const settingsLists = [
 export const faqData = [
   {
     id: 1,
-    question: "What is BankuX?",
+    question: "What is KwikX?",
     answer:
-      "BankuX is a digital banking platform offering convenient financial services online.",
+      "KwikX is a multi-currency fintech platform for exchanging, depositing, and withdrawing CFA, Naira, and USDT.",
   },
   {
     id: 2,
-    question: "What are the services in BankuX?",
+    question: "What currencies does KwikX support?",
     answer:
-      "BankuX is a digital banking platform offering convenient financial services online.",
+      "KwikX supports three currencies: West African CFA Franc (CFA), Nigerian Naira (NGN), and Tether USD (USDT).",
   },
   {
     id: 3,
-    question: "What are the services in BankuX?",
+    question: "How does currency exchange work?",
     answer:
-      "BankuX is a digital banking platform offering convenient financial services online.",
+      "Get a live quote with locked-in rates for 120 seconds, review the fee, and confirm to instantly exchange between your wallets.",
   },
   {
     id: 4,
-    question: "What are the services in BankuX?",
+    question: "Are there transaction limits?",
     answer:
-      "BankuX is a digital banking platform offering convenient financial services online.",
+      "Yes, limits depend on your KYC verification level. Higher verification unlocks larger transaction limits.",
   },
   {
     id: 5,
-    question: "What are the services in BankuX?",
+    question: "How secure is KwikX?",
     answer:
-      "BankuX is a digital banking platform offering convenient financial services online.",
+      "KwikX uses bank-grade security with encrypted data, secure authentication, and full audit trails for all transactions.",
   },
 ];
 

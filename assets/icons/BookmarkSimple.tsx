@@ -1,0 +1,26 @@
+import Svg, { Path } from "react-native-svg";
+
+export function PhBookmarkSimple({
+  size = "16px",
+  color,
+  type = "default",
+}: {
+  size?: string;
+  color: string;
+  type?: string;
+}) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 256 256">
+      <Path
+        fill={color}
+        d={
+          type === "fill"
+            ? ""
+            : type === "bold"
+            ? ""
+            : "M184 32H72a16 16 0 0 0-16 16v176a8 8 0 0 0 12.24 6.78L128 193.43l59.77 37.35A8 8 0 0 0 200 224V48a16 16 0 0 0-16-16m0 177.57l-51.77-32.35a8 8 0 0 0-8.48 0L72 209.57V48h112Z"
+        }
+      ></Path>
+    </Svg>
+  );
+}

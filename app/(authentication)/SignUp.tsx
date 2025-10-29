@@ -44,7 +44,7 @@ const SignUp = () => {
             <View
               className={`border  w-6 h-6 rounded-md justify-center items-center     ${
                 checked
-                  ? "bg-g300 border-g300"
+                  ? "bg-primary border-primary"
                   : "border-n40 dark:border-darkN40"
               }`}
             >
@@ -105,7 +105,7 @@ const SignUp = () => {
         />
         <Pressable onPress={() => router.push("/SignIn")}>
           <ThemedText
-            className="text-g300  text-sm"
+            className="text-primary  text-sm"
             text="Sign In "
             weight="semiBold"
           />

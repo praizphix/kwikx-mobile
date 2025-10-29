@@ -28,7 +28,7 @@ const Account = () => {
           text="Account"
           weight="semiBold"
         />
-        <View className="flex-row justify-between items-center bg-g300 p-6 rounded-2xl  mx-6 mt-6">
+        <View className="flex-row justify-between items-center bg-primary p-6 rounded-2xl  mx-6 mt-6">
           <View className="flex-row justify-start items-center gap-x-4">
             <Image
               source={userImg}
@@ -58,9 +58,9 @@ const Account = () => {
               className={`flex-row justify-between items-center  px-6 pb-5 border-b border-dashed border-n40 dark:border-darkN40`}
             >
               <View className="flex-row justify-start items-center gap-x-4 flex-1">
-                <View className="size-11 rounded-full border border-bgColor2 flex justify-center items-center bg-bgColor text-g300 dark:bg-n0 dark:border-darkN40">
+                <View className="size-11 rounded-full border border-bgColor2 flex justify-center items-center bg-bgColor text-primary dark:bg-n0 dark:border-darkN40">
                   {React.createElement(icon, {
-                    color: "#328B64",
+                    color: "#0A5344",
                     size: "20px",
                   })}
                 </View>
@@ -77,8 +77,8 @@ const Account = () => {
             className={`flex-row justify-between items-center  px-6 pb-5 border-b border-dashed border-n40 dark:border-darkN40`}
           >
             <View className="flex-row justify-start items-center gap-x-4">
-              <View className="size-11 rounded-full border border-bgColor2 flex justify-center items-center bg-bgColor text-g300 dark:bg-n0 dark:border-darkN40">
-                <PhSun color="#328B64" size="20px" />
+              <View className="size-11 rounded-full border border-bgColor2 flex justify-center items-center bg-bgColor text-primary dark:bg-n0 dark:border-darkN40">
+                <PhSun color="#0A5344" size="20px" />
               </View>
               <ThemedText
                 className="text-lg dark:text-white"
@@ -95,11 +95,11 @@ const Account = () => {
             className={`flex-row justify-between items-center  px-6`}
           >
             <View className="flex-row justify-start items-center gap-x-4">
-              <View className="size-11 rounded-full border border-bgColor2 flex justify-center items-center bg-bgColor text-g300 dark:bg-n0 dark:border-darkN40">
-                <PhSignOut color="#328B64" size="20px" />
+              <View className="size-11 rounded-full border border-bgColor2 flex justify-center items-center bg-bgColor text-primary dark:bg-n0 dark:border-darkN40">
+                <PhSignOut color="#0A5344" size="20px" />
               </View>
               <ThemedText
-                className="text-lg text-g300"
+                className="text-lg text-primary"
                 text="Logout"
                 weight="semiBold"
               />
@@ -125,7 +125,7 @@ const Account = () => {
             <Image source={modalBlackBg} className="hidden dark:flex" />
           </View>
           <ThemedText
-            className="text-2xl text-g300 text-center px-12 pb-5 border-b border-dashed border-n40 dark:border-darkN40"
+            className="text-2xl text-primary text-center px-12 pb-5 border-b border-dashed border-n40 dark:border-darkN40"
             text="Logout"
             weight="semiBold"
           />
@@ -163,7 +163,7 @@ const Account = () => {
       >
         <View className="rounded-t-2xl bg-white dark:bg-n0 w-full py-12 px-6">
           <ThemedText
-            className="text-2xl text-g300 text-center px-12 pb-5 border-b border-dashed border-n40 dark:border-darkN40"
+            className="text-2xl text-primary text-center px-12 pb-5 border-b border-dashed border-n40 dark:border-darkN40"
             text="My QR Code"
             weight="semiBold"
           />

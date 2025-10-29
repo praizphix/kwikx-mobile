@@ -6,7 +6,7 @@ import ThemedText from "@/components/ThemedText";
 const AboutBankuX = () => {
   return (
     <View className="bg-white dark:bg-n900  h-full pt-6">
-      <PageTitle title="About" isBgWhite={true} />
+      <PageTitle title="About KwikX" isBgWhite={true} />
 
       <ScrollView className=" overflow-auto pr-4 text-sm pl-6 ">
         <ThemedText

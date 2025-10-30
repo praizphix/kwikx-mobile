@@ -48,7 +48,7 @@ const FormField = ({
         <TextInput
           placeholder={placeholder}
           placeholderTextColor={colorScheme === "dark" ? "#ffff" : "#14141466"}
-          className=" flex-1 py-4 "
+          className=" flex-1 py-4 dark:text-white "
           secureTextEntry={
             secureTextEntryProp !== undefined
               ? (secureTextEntryProp && !showPassword)

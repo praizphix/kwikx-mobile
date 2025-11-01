@@ -4,7 +4,14 @@
     "strict": true,
     "paths": {
       "@/*": [
-        "./*"
+        "./app/*",
+        "./components/*",
+        "./assets/*",
+        "./constants/*",
+        "./lib/*",
+        "./services/*",
+        "./styles/*",
+        "./types/*"
       ]
     }
   },

@@ -1,4 +1,4 @@
-import { Image, Pressable, ScrollView, StyleSheet, View, ActivityIndicator } from "react-native";
+import { Image, Pressable, ScrollView, StyleSheet, View, ActivityIndicator, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
 import { PhBell } from "@/assets/icons/BellIcon";
 import user from "@/assets/images/nayeem.png";
@@ -13,12 +13,35 @@ import { transactionsList } from "@/constants/data";
 import TransactionItemCard from "@/components/cards/TransactionItemCard";
 import { getCurrentUser, getUserProfile } from "@/services/auth";
 import { getUserWallets, getTotalBalance } from "@/services/wallets";
-import { CURRENCY_SYMBOLS } from "@/types/database";
+import { CURRENCY_SYMBOLS, Profile } from "@/types/database";
 import type { Wallet } from "@/types/database";
+import { useColorScheme } from "nativewind";
+import WalletCard from "@/components/cards/WalletCard";
+import PrimaryButton from "@/components/PrimaryButton";
+
+const KYCGate = ({ status }: { status: Profile['kyc_status'] | null }) => (
+  <View className="absolute inset-0 bg-black/50 z-50 flex justify-center items-center p-8">
+    <View className="bg-white dark:bg-darkN20 p-6 rounded-2xl w-full items-center">
+      <ThemedText className="text-xl dark:text-white text-center" weight="bold">
+        {status === 'pending' ? 'Verification Pending' : 'Verify Your Identity'}
+      </ThemedText>
+      <ThemedText className="text-n500 dark:text-darkN500 text-center mt-2 mb-6">
+        {status === 'pending' 
+          ? 'Your documents are under review. This may take up to 24 hours.' 
+          : 'To access your wallets, you need to complete your profile.'}
+      </ThemedText>
+      <PrimaryButton 
+        text="Go to Profile" 
+        onPress={() => router.push('/(settings-pages)/EditProfile')} 
+      />
+    </View>
+  </View>
+);
 
 const Home = () => {
+  const { colorScheme } = useColorScheme();
   const [loading, setLoading] = useState(true);
-  const [userEmail, setUserEmail] = useState("");
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [wallets, setWallets] = useState<Wallet[]>([]);
   const [totalBalance, setTotalBalance] = useState(0);
 
@@ -33,14 +56,18 @@ const Home = () => {
         router.replace("/SignIn");
         return;
       }
+      
+      const userProfile = await getUserProfile(user.id);
+      setProfile(userProfile);
 
-      setUserEmail(user.email || "");
+      if (userProfile?.kyc_status === 'verified') {
+        const userWallets = await getUserWallets(user.id);
+        setWallets(userWallets);
 
-      const userWallets = await getUserWallets(user.id);
-      setWallets(userWallets);
+        const total = await getTotalBalance(user.id);
+        setTotalBalance(total);
+      }
 
-      const total = await getTotalBalance(user.id);
-      setTotalBalance(total);
     } catch (error) {
       console.error("Failed to load user data:", error);
     } finally {
@@ -49,27 +76,25 @@ const Home = () => {
   };
 
   return (
-    <View>
+    <View className="flex-1">
       <ScrollView className="bg-bgColor dark:bg-darkG300">
         <View className="px-6 flex-row justify-between items-center pt-6">
-          <View className="rounded-full  overflow-hidden bg-bgColor2">
+          <View className="rounded-full overflow-hidden bg-bgColor2">
             <Image source={user} className="w-12 h-12 object-cover" />
           </View>
-
           <Image
             source={require('@/assets/images/Untitled design.png')}
             className="w-12 h-12"
             resizeMode="contain"
           />
-
           <Pressable
             onPress={() => router.push("/Notifications")}
-            className="  border border-n500 !leading-none flex-row justify-center items-center rounded-full w-12 h-12 bg-white dark:bg-n0"
+            className="border border-n500 !leading-none flex-row justify-center items-center rounded-full w-12 h-12 bg-white dark:bg-darkN20"
           >
             <View className="absolute top-0 right-0 bg-bgColor rounded-full w-3 h-3 flex justify-center items-center dark:bg-n0">
               <View className="w-2 h-2 rounded-full bg-red-500"></View>
             </View>
-            <PhBell color="#0A5344" size="22px" type="fill" />
+            <PhBell color={colorScheme === 'dark' ? 'white' : '#0A5344'} size="22px" type="fill" />
           </Pressable>
         </View>
 
@@ -86,7 +111,7 @@ const Home = () => {
                   text={totalBalance.toLocaleString()}
                   weight="bold"
                 />
-                <ThemedText className="text-xl text-primary" text=" FCFA" weight="bold" />
+                <ThemedText className="text-xl text-primary dark:text-accent" text=" FCFA" weight="bold" />
               </View>
 
               <ThemedText
@@ -95,49 +120,20 @@ const Home = () => {
               />
             </View>
 
-            <View className="px-6 mb-4">
+            <View className="mb-4">
               <ThemedText
-                className="text-sm text-n500 dark:text-darkN500 mb-3"
+                className="text-sm text-n500 dark:text-darkN500 mb-3 px-6"
                 text="Your Wallets"
                 weight="semiBold"
               />
-              <View className="flex-col gap-3">
-                {wallets.map((wallet) => (
-                  <View
-                    key={wallet.id}
-                    className="bg-white dark:bg-n0 rounded-xl p-4 flex-row justify-between items-center"
-                  >
-                    <View>
-                      <ThemedText
-                        className="text-sm text-n500 dark:text-darkN500"
-                        text={wallet.currency}
-                      />
-                      <ThemedText
-                        className="text-xl dark:text-white"
-                        text={`${CURRENCY_SYMBOLS[wallet.currency]} ${wallet.balance.toLocaleString()}`}
-                        weight="bold"
-                      />
-                    </View>
-                    <View
-                      className={`px-3 py-1 rounded-full ${
-                        wallet.status === "active"
-                          ? "bg-primary/10"
-                          : "bg-n40 dark:bg-darkN40"
-                      }`}
-                    >
-                      <ThemedText
-                        className={`text-xs ${
-                          wallet.status === "active"
-                            ? "text-primary"
-                            : "text-n500"
-                        }`}
-                        text={wallet.status}
-                        weight="semiBold"
-                      />
-                    </View>
-                  </View>
-                ))}
-              </View>
+              <FlatList
+                data={wallets}
+                renderItem={({ item }) => <WalletCard wallet={item} />}
+                keyExtractor={(item) => item.id}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{ paddingHorizontal: 24 }}
+              />
             </View>
           </>
         )}
@@ -146,61 +142,61 @@ const Home = () => {
           <View className="flex-row gap-x-3 justify-start items-center">
             <Pressable
               onPress={() => router.push("/Exchange")}
-              className="bg-accent/20 rounded-2xl py-4 flex-1 max-w-[85px] flex flex-col justify-center items-center shrink-0"
+              className="bg-accent/20 dark:bg-darkN20 rounded-2xl py-4 flex-1 max-w-[85px] flex flex-col justify-center items-center shrink-0"
             >
-              <View className="h-8 w-8 rounded-full bg-n0 flex justify-center items-center">
+              <View className="h-8 w-8 rounded-full bg-n0 dark:bg-darkN40 flex justify-center items-center">
                 <Image source={icon1} className="w-4 h-4" />
               </View>
               <ThemedText
-                className="pt-3 text-center dark:text-n0 text-sm"
+                className="pt-3 text-center text-n500 dark:text-white text-sm"
                 text="Exchange"
                 weight="medium"
               />
             </Pressable>
             <Pressable
               onPress={() => router.push("/DepositMoney")}
-              className="bg-primary/20 rounded-2xl py-4 flex-1 max-w-[85px] flex flex-col justify-center items-center shrink-0"
+              className="bg-primary/20 dark:bg-darkN20 rounded-2xl py-4 flex-1 max-w-[85px] flex flex-col justify-center items-center shrink-0"
             >
-              <View className="h-8 w-8 rounded-full bg-n0 flex justify-center items-center">
+              <View className="h-8 w-8 rounded-full bg-n0 dark:bg-darkN40 flex justify-center items-center">
                 <Image source={icon2} className="w-4 h-4" />
               </View>
               <ThemedText
-                className="pt-3 text-center dark:text-n0 text-sm"
+                className="pt-3 text-center text-n500 dark:text-white text-sm"
                 text="Deposit"
                 weight="medium"
               />
             </Pressable>
             <Pressable
               onPress={() => router.push("/WithdrawMoney")}
-              className="bg-yellow-200 rounded-2xl py-4 flex-1 max-w-[85px] flex flex-col justify-center items-center shrink-0"
+              className="bg-yellow-200 dark:bg-darkN20 rounded-2xl py-4 flex-1 max-w-[85px] flex flex-col justify-center items-center shrink-0"
             >
-              <View className="h-8 w-8 rounded-full bg-n0 flex justify-center items-center">
+              <View className="h-8 w-8 rounded-full bg-n0 dark:bg-darkN40 flex justify-center items-center">
                 <Image source={icon3} className="w-4 h-4" />
               </View>
 
               <ThemedText
-                className="pt-3 text-center dark:text-n0 text-sm"
+                className="pt-3 text-center text-n500 dark:text-white text-sm"
                 text="Withdraw"
                 weight="medium"
               />
             </Pressable>
             <Pressable
               onPress={() => router.push("/TopUpMoney")}
-              className="bg-primary/10 rounded-2xl py-4 flex-1 max-w-[85px] flex flex-col justify-center items-center shrink-0"
+              className="bg-primary/10 dark:bg-darkN20 rounded-2xl py-4 flex-1 max-w-[85px] flex flex-col justify-center items-center shrink-0"
             >
-              <View className="h-8 w-8 rounded-full bg-n0 flex justify-center items-center">
+              <View className="h-8 w-8 rounded-full bg-n0 dark:bg-darkN40 flex justify-center items-center">
                 <Image source={icon2} className="w-4 h-4" />
               </View>
 
               <ThemedText
-                className="pt-3 text-center dark:text-n0 text-sm"
+                className="pt-3 text-center text-n500 dark:text-white text-sm"
                 text="Top Up"
                 weight="medium"
               />
             </Pressable>
           </View>
         </View>
-        <View className="bg-white rounded-t-3xl pt-14 -mt-14 flex-1 pb-32 dark:bg-n0">
+        <View className="bg-white rounded-t-3xl pt-14 -mt-14 flex-1 pb-32 dark:bg-darkN20">
           <View className="px-6 pt-8">
             <Pressable
               onPress={() => router.push("/BillPay")}
@@ -220,7 +216,7 @@ const Home = () => {
 
                 <PhArrowRight color="white" size="20px" />
               </View>
-              <View className="">
+              <View>
                 <Image source={payBillIllus} />
               </View>
             </Pressable>
@@ -238,7 +234,7 @@ const Home = () => {
                 className=""
               >
                 <ThemedText
-                  className="text-primary  text-sm"
+                  className="text-primary dark:text-accent text-sm"
                   text=" View All"
                   weight="semiBold"
                 />
@@ -264,6 +260,7 @@ const Home = () => {
           </View>
         </View>
       </ScrollView>
+      {profile && profile.kyc_status !== 'verified' && <KYCGate status={profile.kyc_status} />}
     </View>
   );
 };

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "bankux-app",
-    "slug": "bankux-app",
+    "name": "Kwikx",
+    "slug": "kwikx",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -16,7 +16,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.sakibb.bankuxapp"
+      "package": "com.sakibb.kwikxapp"
     },
     "web": {
       "bundler": "metro",

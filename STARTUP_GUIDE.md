@@ -1,5 +1,18 @@
 # KwikX Startup Guide
 
+## ✅ FIXED: "expo command not found" Error
+
+**Issue Resolved!** All npm scripts have been updated to use `npx expo` instead of `expo`.
+
+You can now run:
+```bash
+npm start
+```
+
+And it will work correctly!
+
+---
+
 ## System Overview
 
 Your KwikX platform consists of two applications:

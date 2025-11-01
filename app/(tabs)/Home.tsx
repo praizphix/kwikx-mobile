@@ -26,14 +26,21 @@ const KYCGate = ({ status }: { status: Profile['kyc_status'] | null }) => (
         {status === 'pending' ? 'Verification Pending' : 'Verify Your Identity'}
       </ThemedText>
       <ThemedText className="text-n500 dark:text-darkN500 text-center mt-2 mb-6">
-        {status === 'pending' 
-          ? 'Your documents are under review. This may take up to 24 hours.' 
-          : 'To access your wallets, you need to complete your profile.'}
+        {status === 'pending'
+          ? 'Your documents are under review. This usually takes 24-48 hours. Your wallets are currently frozen.'
+          : 'Complete KYC verification to activate your wallets and start using the app.'}
       </ThemedText>
-      <PrimaryButton 
-        text="Go to Profile" 
-        onPress={() => router.push('/(settings-pages)/EditProfile')} 
-      />
+      {status === 'pending' ? (
+        <PrimaryButton
+          text="View Status"
+          onPress={() => router.push('/(settings-pages)/EditProfile')}
+        />
+      ) : (
+        <PrimaryButton
+          text="Start KYC Verification"
+          onPress={() => router.push('/KYCVerification')}
+        />
+      )}
     </View>
   </View>
 );
@@ -66,6 +73,10 @@ const Home = () => {
 
         const total = await getTotalBalance(user.id);
         setTotalBalance(total);
+      } else {
+        // Show frozen wallets for non-verified users
+        const allWallets = await getUserWallets(user.id, true);
+        setWallets(allWallets);
       }
 
     } catch (error) {

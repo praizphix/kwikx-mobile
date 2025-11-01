@@ -17,20 +17,34 @@ const formatWalletId = (id: string) => {
 };
 
 const WalletCard = ({ wallet }: { wallet: Wallet }) => {
+  const isFrozen = wallet.status === 'frozen';
+
   const handlePress = () => {
-    router.push({ 
-      pathname: '/(screens)/WalletDetail', 
-      params: { 
-        walletId: wallet.id, 
-        currency: wallet.currency, 
-        balance: wallet.balance, 
-        available_balance: wallet.available_balance 
+    if (isFrozen) return;
+
+    router.push({
+      pathname: '/(screens)/WalletDetail',
+      params: {
+        walletId: wallet.id,
+        currency: wallet.currency,
+        balance: wallet.balance,
+        available_balance: wallet.available_balance
       },
     });
   };
 
   return (
-    <Pressable onPress={handlePress} className="bg-white dark:bg-darkN20 rounded-2xl p-6 w-80 h-48 mr-4 flex-col justify-between shadow-md">
+    <Pressable
+      onPress={handlePress}
+      className={`bg-white dark:bg-darkN20 rounded-2xl p-6 w-80 h-48 mr-4 flex-col justify-between shadow-md ${isFrozen ? 'opacity-60' : ''}`}
+    >
+      {/* Frozen Badge */}
+      {isFrozen && (
+        <View className="absolute top-4 right-4 bg-red-500 px-3 py-1 rounded-full">
+          <ThemedText className="text-white text-xs" weight="bold">FROZEN</ThemedText>
+        </View>
+      )}
+
       {/* Top Section: Currency Info */}
       <View className="flex-row items-center">
         <View className="w-10 h-10 rounded-full bg-n40 dark:bg-darkN40 mr-4 flex items-center justify-center">
@@ -42,16 +56,18 @@ const WalletCard = ({ wallet }: { wallet: Wallet }) => {
             {wallet.currency} Wallet
           </ThemedText>
           <ThemedText className="text-sm text-n500 dark:text-darkN500">
-            {formatWalletId(wallet.id)}
+            {isFrozen ? 'KYC Required' : formatWalletId(wallet.id)}
           </ThemedText>
         </View>
       </View>
 
       {/* Bottom Section: Balance */}
       <View>
-        <ThemedText className="text-sm text-n500 dark:text-darkN500">Available Balance</ThemedText>
+        <ThemedText className="text-sm text-n500 dark:text-darkN500">
+          {isFrozen ? 'Complete KYC to Activate' : 'Available Balance'}
+        </ThemedText>
         <ThemedText className="text-3xl text-n900 dark:text-white mt-1" weight="bold">
-          {CURRENCY_SYMBOLS[wallet.currency]}{wallet.available_balance.toLocaleString()}
+          {isFrozen ? '---' : `${CURRENCY_SYMBOLS[wallet.currency]}${wallet.available_balance.toLocaleString()}`}
         </ThemedText>
       </View>
     </Pressable>

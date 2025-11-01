@@ -1,15 +1,27 @@
 import { supabase } from '@/lib/supabase';
 
-export async function getUserWallets(userId: string) {
-  const { data, error } = await supabase
+export async function getUserWallets(userId: string, includeAll: boolean = false) {
+  let query = supabase
     .from('wallets')
     .select('*')
-    .eq('user_id', userId)
-    .eq('status', 'active')
-    .order('currency');
+    .eq('user_id', userId);
+
+  if (!includeAll) {
+    query = query.eq('status', 'active');
+  }
+
+  const { data, error } = await query.order('currency');
 
   if (error) throw error;
   return data || [];
+}
+
+export async function getActiveWallets(userId: string) {
+  return getUserWallets(userId, false);
+}
+
+export async function getAllWallets(userId: string) {
+  return getUserWallets(userId, true);
 }
 
 export async function getWalletByCurrency(userId: string, currency: 'CFA' | 'NGN' | 'USDT') {

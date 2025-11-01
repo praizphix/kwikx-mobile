@@ -12,7 +12,7 @@ A super admin account has been successfully created with the following details:
 
 ## Account Details
 
-- **Full Name:** Admin User
+- **Full Name:** Idowu James
 - **KYC Status:** verified
 - **KYC Level:** 2 (highest level)
 - **Created:** November 1, 2025

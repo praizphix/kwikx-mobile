@@ -41,3 +41,31 @@ export async function getUserProfile(userId: string) {
   if (error) throw error;
   return data;
 }
+
+export async function updateUserProfile(
+  userId: string,
+  updates: {
+    full_name?: string;
+    phone?: string;
+    country?: string;
+  }
+) {
+  const updateData: any = {
+    ...updates,
+    updated_at: new Date().toISOString(),
+  };
+
+  if (updates.full_name && updates.phone && updates.country) {
+    updateData.kyc_status = 'pending';
+  }
+
+  const { data, error } = await supabase
+    .from('profiles')
+    .update(updateData)
+    .eq('id', userId)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data;
+}

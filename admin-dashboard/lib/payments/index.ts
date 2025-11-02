@@ -398,8 +398,8 @@ export class PaymentService {
     userId: string;
     transactionPin?: string;
   }): Promise<PaymentResponse> {
-    // Use PayOnUs exclusively for Naira operations
-    return this.initializePayOnUsDeposit(payload);
+    // Use Paystack for Naira operations
+    return this.initializePaystackDeposit(payload);
   }
 
   // PayOnUs direct payin method

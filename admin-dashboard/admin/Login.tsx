@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, AlertCircle, ShieldCheck, AlertTriangle } from 'lucide-react';
-import { supabase, supabaseConfig } from '../../lib/supabase';
+import { supabase, supabaseConfig } from '../lib/supabase';
 import toast from 'react-hot-toast';
 
 const AdminLogin: React.FC = () => {

@@ -10,7 +10,8 @@ export class FedaPayService {
   constructor() {
     this.apiKey = import.meta.env.VITE_FEDAPAY_SECRET_KEY || '';
     this.publicKey = import.meta.env.VITE_FEDAPAY_PUBLIC_KEY || '';
-    this.environment = import.meta.env.VITE_FEDAPAY_ENVIRONMENT || 'sandbox';
+    const envValue = import.meta.env.VITE_FEDAPAY_ENVIRONMENT || 'sandbox';
+    this.environment = (envValue === 'live' || envValue === 'sandbox') ? envValue : 'sandbox';
     this.baseUrl = this.environment === 'sandbox' 
       ? 'https://sandbox-api.fedapay.com/v1'
       : 'https://api.fedapay.com/v1';
